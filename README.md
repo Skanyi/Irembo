@@ -44,6 +44,27 @@ Edit the output to have the only files we need for this project.
 After you done, create the release of the app
 `helm install -f helloworld.yaml helloworld ./app`
 
+# Create a namespace
+`kubectl create -f hello-namespace.json`
+
+# Install the app in that namespace
+`helm install --namespace helloworld -f helloworld.yaml helloworld ./app`
+
+# can update the context and change the namespace
+`kubectl config set-context minikube --namespace=helloworld`
+
+
+### Deploy default redis chart to helloworld namespace
+Install redis chart(bitnami)
+`helm repo add bitnami https://charts.bitnami.com/bitnami`
+`helm install helloworld-redis bitnami/redis`
+
+### Connect helloworld app to redis
+Using the port and and password given, you can connect via tcp. Need to create a redis config file that sets the value neede. 
+It has a clien-server connection architecture.  
+
+`kubectl port-forward --namespace helloworld helloworld-redis-master 6379:6379 & redis-cli -h 127.0.0.1 -p 6379 -a $REDIS_PASSWORD`
+
 ### Technology Used
 Docker
 Local Kubernetes cluster -- minikube
