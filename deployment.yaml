@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: helloworld:latest
+        image: kanyi/helloworld:latest
         imagePullPolicy: Never
         ports:
         - containerPort: 5000

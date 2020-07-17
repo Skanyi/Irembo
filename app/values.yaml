@@ -1,0 +1,10 @@
+app:
+  name: helloworld
+  group: app
+  replicaCount: 1
+  container:
+    image: kanyi/helloworld
+    port: 5000
+  service:
+    type: ClusterIP
+    port: 5000
